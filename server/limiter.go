@@ -15,12 +15,7 @@
 package server
 
 import (
-	"context"
-	"sync/atomic"
-
-	"github.com/cloudwego/kitex/pkg/klog"
-	"github.com/cloudwego/kitex/pkg/limit"
-	"github.com/cloudwego/kitex/pkg/limiter"
+	cwserver "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/server"
 	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/config-zookeeper/utils"
 	"github.com/kitex-contrib/config-zookeeper/zookeeper"
@@ -28,53 +23,5 @@ import (
 
 // WithLimiter sets the limiter config from zookeeper configuration center.
 func WithLimiter(dest string, zookeeperClient zookeeper.Client, opts utils.Options) server.Option {
-	param, err := zookeeperClient.ServerConfigParam(&zookeeper.ConfigParamConfig{
-		Category:          limiterConfigName,
-		ServerServiceName: dest,
-	})
-	if err != nil {
-		panic(err)
-	}
-	for _, f := range opts.ZookeeperCustomFunctions {
-		f(&param)
-	}
-	uid := zookeeper.GetUniqueID()
-	path := param.Prefix + "/" + param.Path
-	server.RegisterShutdownHook(func() {
-		zookeeperClient.DeregisterConfig(path, uid)
-	})
-
-	return server.WithLimit(initLimitOptions(path, uid, dest, zookeeperClient))
-}
-
-func initLimitOptions(path string, uniqueID int64, dest string, zookeeperClient zookeeper.Client) *limit.Option {
-	var updater atomic.Value
-	opt := &limit.Option{}
-	opt.UpdateControl = func(u limit.Updater) {
-		klog.Debugf("[zookeeper] %s server zookeeper limiter updater init, config %v", dest, *opt)
-		u.UpdateLimit(opt)
-		updater.Store(u)
-	}
-	onChangeCallback := func(restoreDefault bool, data string, parser zookeeper.ConfigParser) {
-		lc := &limiter.LimiterConfig{}
-		if !restoreDefault && data != "" {
-			err := parser.Decode(data, lc)
-			if err != nil {
-				klog.Warnf("[zookeeper] %s server zookeeper config: unmarshal data %s failed: %s, skip...", dest, data, err)
-				return
-			}
-		}
-		opt.MaxConnections = int(lc.ConnectionLimit)
-		opt.MaxQPS = int(lc.QPSLimit)
-		u := updater.Load()
-		if u == nil {
-			klog.Warnf("[zookeeper] %s server zookeeper limiter config failed as the updater is empty", dest)
-			return
-		}
-		if !u.(limit.Updater).UpdateLimit(opt) {
-			klog.Warnf("[zookeeper] %s server zookeeper limiter config: data %s may do not take affect", dest, data)
-		}
-	}
-	zookeeperClient.RegisterConfigCallback(context.Background(), path, uniqueID, onChangeCallback)
-	return opt
+	return cwserver.WithLimiter(dest, zookeeperClient, opts)
 }

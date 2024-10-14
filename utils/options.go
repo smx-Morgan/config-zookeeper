@@ -14,14 +14,10 @@
 
 package utils
 
-import "github.com/kitex-contrib/config-zookeeper/zookeeper"
+import cwutils "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/utils"
 
 // Option is used to custom Options.
-type Option interface {
-	Apply(*Options)
-}
+type Option = cwutils.Option
 
 // Options is used to initialize the zookeeper config suit or option.
-type Options struct {
-	ZookeeperCustomFunctions []zookeeper.CustomFunction
-}
+type Options = cwutils.Options

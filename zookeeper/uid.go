@@ -14,12 +14,13 @@
 
 package zookeeper
 
-import "sync/atomic"
+import (
+	cwzook "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/zookeeper"
+)
 
 var uniqueID int64
 
 // GetUniqueID get the unique id
 func GetUniqueID() int64 {
-	atomic.AddInt64(&uniqueID, 1)
-	return atomic.LoadInt64(&uniqueID)
+	return cwzook.GetUniqueID()
 }

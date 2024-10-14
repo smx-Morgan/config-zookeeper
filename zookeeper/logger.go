@@ -15,16 +15,10 @@
 package zookeeper
 
 import (
-	"github.com/cloudwego/kitex/pkg/klog"
+	cwzook "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/zookeeper"
 	"github.com/go-zookeeper/zk"
 )
 
-type customZookeeperLogger struct{}
-
 func NewCustomZookeeperLogger() zk.Logger {
-	return customZookeeperLogger{}
-}
-
-func (m customZookeeperLogger) Printf(fmt string, args ...interface{}) {
-	klog.Infof(fmt, args...)
+	return cwzook.NewCustomZookeeperLogger()
 }

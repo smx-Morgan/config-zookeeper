@@ -15,61 +15,14 @@
 package client
 
 import (
-	"context"
+	cwclient "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/client"
 
 	"github.com/cloudwego/kitex/client"
-	"github.com/cloudwego/kitex/pkg/klog"
-	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"github.com/cloudwego/kitex/pkg/rpctimeout"
 	"github.com/kitex-contrib/config-zookeeper/utils"
 	"github.com/kitex-contrib/config-zookeeper/zookeeper"
 )
 
 // WithRPCTimeout sets the RPC timeout policy from zookeeper configuration center.
 func WithRPCTimeout(dest, src string, zookeeperClient zookeeper.Client, opts utils.Options) []client.Option {
-	param, err := zookeeperClient.ClientConfigParam(&zookeeper.ConfigParamConfig{
-		Category:          rpcTimeoutConfigName,
-		ServerServiceName: dest,
-		ClientServiceName: src,
-	})
-	if err != nil {
-		panic(err)
-	}
-
-	for _, f := range opts.ZookeeperCustomFunctions {
-		f(&param)
-	}
-
-	uid := zookeeper.GetUniqueID()
-	path := param.Prefix + "/" + param.Path
-
-	return []client.Option{
-		client.WithTimeoutProvider(initRPCTimeoutContainer(path, uid, dest, zookeeperClient)),
-		client.WithCloseCallbacks(func() error {
-			// cancel the configuration listener when client is closed.
-			zookeeperClient.DeregisterConfig(path, uid)
-			return nil
-		}),
-	}
-}
-
-func initRPCTimeoutContainer(path string, uniqueID int64, dest string, zookeeperClient zookeeper.Client) rpcinfo.TimeoutProvider {
-	rpcTimeoutContainer := rpctimeout.NewContainer()
-
-	onChangeCallback := func(restoreDefault bool, data string, parser zookeeper.ConfigParser) {
-		configs := map[string]*rpctimeout.RPCTimeout{}
-		if !restoreDefault {
-			err := parser.Decode(data, &configs)
-			if err != nil {
-				klog.Warnf("[zookeeper] %s client zookeeper rpc timeout: unmarshal data %s failed: %s, skip...", path, data, err)
-				return
-			}
-		}
-
-		rpcTimeoutContainer.NotifyPolicyChange(configs)
-	}
-
-	zookeeperClient.RegisterConfigCallback(context.Background(), path, uniqueID, onChangeCallback)
-
-	return rpcTimeoutContainer
+	return cwclient.WithRPCTimeout(dest, src, zookeeperClient, opts)
 }

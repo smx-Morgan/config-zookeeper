@@ -15,7 +15,7 @@
 package server
 
 import (
-	"github.com/cloudwego/kitex/server"
+	cwserver "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/server"
 	"github.com/kitex-contrib/config-zookeeper/utils"
 	"github.com/kitex-contrib/config-zookeeper/zookeeper"
 )
@@ -25,27 +25,9 @@ const (
 )
 
 // ZookeeperServerSuite  zookeeper server config suite, configure limiter config dynamically from zookeeper .
-type ZookeeperServerSuite struct {
-	zookeeperClient zookeeper.Client
-	service         string
-	opts            utils.Options
-}
+type ZookeeperServerSuite = cwserver.ZookeeperServerSuite
 
 // NewSuite service is the destination service.
 func NewSuite(service string, cli zookeeper.Client, opts ...utils.Option) *ZookeeperServerSuite {
-	su := &ZookeeperServerSuite{
-		service:         service,
-		zookeeperClient: cli,
-	}
-	for _, opt := range opts {
-		opt.Apply(&su.opts)
-	}
-	return su
-}
-
-// Options return a list server.Option
-func (s *ZookeeperServerSuite) Options() []server.Option {
-	opts := make([]server.Option, 0, 2)
-	opts = append(opts, WithLimiter(s.service, s.zookeeperClient, s.opts))
-	return opts
+	return cwserver.NewSuite(service, cli, opts...)
 }

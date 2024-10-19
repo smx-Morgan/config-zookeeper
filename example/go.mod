@@ -4,16 +4,14 @@ go 1.21
 
 toolchain go1.22.8
 
-replace github.com/kitex-contrib/config-zookeeper => ../
+replace github.com/cloudwego-contrib/cwgo-pkg/config/common => github.com/smx-Morgan/cwgo-pkg/config/common v0.0.0-20241016000926-d56ef7e0f578
 
-replace github.com/cloudwego-contrib/cwgo-pkg/config/common => ../../cwgo-pkg-registry/config/common
-
-replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => ../../cwgo-pkg-registry/config/zookeeper
+replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => github.com/smx-Morgan/cwgo-pkg/config/zookeeper v0.0.0-20241016000926-d56ef7e0f578
 
 require (
 	github.com/cloudwego/kitex v0.11.3
 	github.com/cloudwego/kitex-examples v0.3.3
-	github.com/kitex-contrib/config-zookeeper v0.0.0-00010101000000-000000000000
+	github.com/kitex-contrib/config-zookeeper v0.1.0
 )
 
 require (
@@ -21,8 +19,6 @@ require (
 	github.com/bytedance/gopkg v0.1.1 // indirect
 	github.com/bytedance/sonic v1.12.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.0 // indirect
-	github.com/cloudwego-contrib/cwgo-pkg/config/common v0.0.0-00010101000000-000000000000 // indirect
-	github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper v0.0.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/configmanager v0.2.2 // indirect
 	github.com/cloudwego/dynamicgo v0.4.0 // indirect
@@ -38,15 +34,18 @@ require (
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/go-zookeeper/zk v1.0.4 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
 	github.com/jhump/protoreflect v1.8.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/gls v0.0.0-20220109145502-612d0167dce5 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
+	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/tidwall/gjson v1.17.3 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
@@ -60,8 +59,8 @@ require (
 	google.golang.org/genproto v0.0.0-20231012201019-e917dd12ba7a // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	sigs.k8s.io/yaml v1.4.0 // indirect
 )
 
 replace github.com/apache/thrift => github.com/apache/thrift v0.13.0

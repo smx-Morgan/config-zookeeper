@@ -56,6 +56,7 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
 
-replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => ../cwgo-pkg-registry/config/zookeeper
+replace github.com/cloudwego-contrib/cwgo-pkg/config/common => github.com/smx-Morgan/cwgo-pkg/config/common v0.0.0-20241016000926-d56ef7e0f578
 
-replace github.com/cloudwego-contrib/cwgo-pkg/config/common => ../cwgo-pkg-registry/config/common
+replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => github.com/smx-Morgan/cwgo-pkg/config/zookeeper v0.0.0-20241016000926-d56ef7e0f578
+

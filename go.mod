@@ -2,8 +2,6 @@ module github.com/kitex-contrib/config-zookeeper
 
 go 1.21
 
-toolchain go1.22.8
-
 require (
 	github.com/cloudwego-contrib/cwgo-pkg/config/common v0.0.0-00010101000000-000000000000
 	github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper v0.0.0

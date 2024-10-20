@@ -2,8 +2,6 @@ module example
 
 go 1.21
 
-toolchain go1.22.8
-
 replace github.com/cloudwego-contrib/cwgo-pkg/config/common => github.com/smx-Morgan/cwgo-pkg/config/common v0.0.0-20241016000926-d56ef7e0f578
 
 replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => github.com/smx-Morgan/cwgo-pkg/config/zookeeper v0.0.0-20241016000926-d56ef7e0f578

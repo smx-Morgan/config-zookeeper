@@ -20,10 +20,6 @@ import (
 	"github.com/kitex-contrib/config-zookeeper/zookeeper"
 )
 
-const (
-	limiterConfigName = "limit"
-)
-
 // ZookeeperServerSuite  zookeeper server config suite, configure limiter config dynamically from zookeeper .
 type ZookeeperServerSuite = cwserver.ZookeeperServerSuite
 

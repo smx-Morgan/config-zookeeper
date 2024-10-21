@@ -18,8 +18,6 @@ import (
 	cwzook "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/zookeeper"
 )
 
-var uniqueID int64
-
 // GetUniqueID get the unique id
 func GetUniqueID() int64 {
 	return cwzook.GetUniqueID()

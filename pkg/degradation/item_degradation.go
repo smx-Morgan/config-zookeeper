@@ -18,11 +18,6 @@ import (
 	degradation "github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/pkg/degradation"
 )
 
-var defaultConfig = &Config{
-	Enable:     false,
-	Percentage: 0,
-}
-
 type Config = degradation.Config
 
 // Container is a wrapper for Config

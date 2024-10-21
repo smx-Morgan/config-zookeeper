@@ -20,13 +20,6 @@ import (
 	"github.com/kitex-contrib/config-zookeeper/zookeeper"
 )
 
-const (
-	retryConfigName          = "retry"
-	rpcTimeoutConfigName     = "rpc_timeout"
-	circuitBreakerConfigName = "circuit_break"
-	degradationConfigName    = "degradation"
-)
-
 // ZookeeperClientSuite zookeeper client config suite, configure retry timeout limit and circuitbreak dynamically from zookeeper.
 type ZookeeperClientSuite = cwclient.ZookeeperClientSuite
 

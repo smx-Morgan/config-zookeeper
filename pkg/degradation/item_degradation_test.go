@@ -35,5 +35,4 @@ func TestNewContainer(t *testing.T) {
 	test.Assert(t, errors.Is(aclMiddleware(invoke)(context.Background(), nil, nil), errFake))
 	container.NotifyPolicyChange(&Config{Enable: false, Percentage: 100})
 	test.Assert(t, errors.Is(aclMiddleware(invoke)(context.Background(), nil, nil), errFake))
-
 }

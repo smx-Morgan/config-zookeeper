@@ -2,9 +2,9 @@ module example
 
 go 1.21
 
-replace github.com/cloudwego-contrib/cwgo-pkg/config/common => github.com/smx-Morgan/cwgo-pkg/config/common v0.0.0-20241016000926-d56ef7e0f578
+replace github.com/cloudwego-contrib/cwgo-pkg/config/common => github.com/smx-Morgan/cwgo-pkg/config/common v0.0.0-20241022123807-97b427526bb6
 
-replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => github.com/smx-Morgan/cwgo-pkg/config/zookeeper v0.0.0-20241016000926-d56ef7e0f578
+replace github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper => github.com/smx-Morgan/cwgo-pkg/config/zookeeper v0.0.0-20241022123807-97b427526bb6
 
 require (
 	github.com/cloudwego/kitex v0.11.3
@@ -29,7 +29,6 @@ require (
 	github.com/cloudwego/thriftgo v0.3.17 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
-	github.com/go-zookeeper/zk v1.0.3 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect

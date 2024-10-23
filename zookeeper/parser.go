@@ -15,27 +15,22 @@
 package zookeeper
 
 import (
-	utils "github.com/cloudwego-contrib/cwgo-pkg/config/common"
+	"github.com/cloudwego-contrib/cwgo-pkg/config/zookeeper/zookeeper"
 )
 
 const ( //`{{$Prefix}}/{{$ClientName}}/{{$ServerName}}/{{$ConfigCategory}}`
-	ZookeeperDefaultServer     = "127.0.0.1:2181"
-	ZookeeperDefaultClientPath = "{{.ClientServiceName}}/{{.ServerServiceName}}/{{.Category}}"
-	ZookeeperDefaultServerPath = "{{.ServerServiceName}}/{{.Category}}"
-	ZookeeperDefaultPrefix     = "/KitexConfig"
+	ZookeeperDefaultServer     = zookeeper.ZookeeperDefaultServer
+	ZookeeperDefaultClientPath = zookeeper.ZookeeperDefaultClientPath
+	ZookeeperDefaultServerPath = zookeeper.ZookeeperDefaultServerPath
+	ZookeeperDefaultPrefix     = zookeeper.ZookeeperDefaultPrefix
 )
 
 // CustomFunction use for customize the config parameters.
-type CustomFunction func(*ConfigParam)
+type CustomFunction = zookeeper.CustomFunction
 
 // ConfigParamConfig use for render the path info by go template, ref: https://pkg.go.dev/text/template
 // The fixed key shows as below.
-type ConfigParamConfig = utils.ConfigParamConfig
+type ConfigParamConfig = zookeeper.ConfigParamConfig
 
 // ConfigParser the parser for zookeeper config.
-type ConfigParser = utils.ConfigParser
-
-// DefaultConfigParser default zookeeper config parser.
-func DefaultConfigParser() ConfigParser {
-	return utils.DefaultConfigParse()
-}
+type ConfigParser = zookeeper.ConfigParser
